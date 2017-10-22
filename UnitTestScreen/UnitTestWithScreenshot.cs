@@ -27,12 +27,11 @@ namespace UnitTestScreen
         public void TestMethod()
         {
             const string resourceUri = @"http://courses.way2automation.com";
-            //Assert.AreEqual(1, 2, new ScreenshotHelper(driver).TakeScreenshotAndGetBase64Link(), new object[] { });
             driver.Navigate().GoToUrl(resourceUri);
-            // insert cookies managing
             CookiesHelper cookiesHelper = new CookiesHelper(
                 Path.Combine( TestContext.CurrentContext.TestDirectory,
                     resourceUri.Substring(resourceUri.LastIndexOf(".", resourceUri.LastIndexOf(".") - 1) + 1)));
+
             if (cookiesHelper.IsSet)
             {
                 foreach (Cookie cookie in cookiesHelper.Cookies)
@@ -42,7 +41,7 @@ namespace UnitTestScreen
                 driver.Navigate().Refresh();
             }
             else
-            { // authenticate
+            { 
                 driver.FindElement(By.XPath(@"//a[contains(concat(' ',@href,' '),' /sign_in ')]")).Click();
                 
                 driver.FindElement(By.XPath(@"//input[contains(concat(' ',@id,' '),' user_email ')]")).SendKeys(@"i1go1by@gmail.com");
