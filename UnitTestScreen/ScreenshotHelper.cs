@@ -39,9 +39,9 @@ namespace UnitTestScreen
         }
         public string TakeScreenshotAndGetBase64Link()
         {
-            string filePath = TakeB64Screenshot();
-            return $"<a href = \"data:image/png;base64,{TakeB64Screenshot()}\" target = \"_blank\"> " +
-                $"<img src = \"data:image/png;base64,{TakeB64Screenshot()}\" alt = \"Screensot\" width=\"100%\" ></a><br>";
+            string fileContent = TakeB64Screenshot();
+            return $"<a href = \"data:image/png;base64,{fileContent}\" target = \"_blank\"> " +
+                $"<img src = \"data:image/png;base64,{fileContent}\" alt = \"Screensot\" width=\"100%\" ></a><br>";
         }
     }
 }
