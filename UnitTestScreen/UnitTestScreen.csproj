@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainPage.cs" />
     <Compile Include="ScreenshotHelper.cs" />
     <Compile Include="UnitTestWithScreenshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
