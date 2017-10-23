@@ -8,56 +8,33 @@ using System.Threading;
 using System.IO;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace UnitTestScreen
 {
     [TestFixture]
     public class UnitTestWithScreenshot
     {
+        private const string resourceUri = @"http://courses.way2automation.com";
+        private const string UserName = @"i1go1by@gmail.com";
+        private const string UserPassword = @"321654";
+
+        
         private RemoteWebDriver driver;
 
-        [OneTimeSetUp]
-        public void RunDriver()
+         [Test]
+        public void TestMethod()
         {
             driver = new RemoteWebDriver(new ChromeOptions().ToCapabilities());
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-        }
+            driver.Manage().Window.Size = new Size(1360, 1020);
 
-        [Test]
-        public void TestMethod()
-        {
-            const string resourceUri = @"http://courses.way2automation.com";
             driver.Navigate().GoToUrl(resourceUri);
-            CookiesHelper cookiesHelper = new CookiesHelper(
-                Path.Combine( TestContext.CurrentContext.TestDirectory,
-                    resourceUri.Substring(resourceUri.LastIndexOf(".", resourceUri.LastIndexOf(".") - 1) + 1)));
 
-            if (cookiesHelper.IsSet)
-            {
-                foreach (Cookie cookie in cookiesHelper.Cookies)
-                {
-                    driver.Manage().Cookies.AddCookie(cookie);
-                }
-                driver.Navigate().Refresh();
-            }
-            else
-            { 
-                driver.FindElement(By.XPath(@"//a[contains(concat(' ',@href,' '),' /sign_in ')]")).Click();
-                
-                driver.FindElement(By.XPath(@"//input[contains(concat(' ',@id,' '),' user_email ')]")).SendKeys(@"i1go1by@gmail.com");
-                driver.FindElement(By.XPath(@"//input[contains(concat(' ',@id,' '),' user_password ')]")).SendKeys(@"321654");
-                driver.FindElement(By.XPath(@"//*[contains(concat(' ',@id,' '),' new_user ')]//input[contains(concat(' ',@class,' '),' login-button ')]")).Click();
+            MainPage mainPage = new MainPage(driver, TestContext.CurrentContext);
+            mainPage.Authenticate(resourceUri,UserName, UserPassword);
 
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(drv => driver.FindElements(By.XPath(@"//*[contains(concat(' ',@id,' '),' navbar ')]//img[contains(concat(' ',@alt,' '),' i1go1by@gmail.com ')]")));
-
-                cookiesHelper.Cookies = driver.Manage().Cookies.AllCookies; 
-            }
-            CollectionAssert.IsNotEmpty(driver.FindElements(By.XPath(@"//*[contains(concat(' ',@id,' '),' navbar ')]//img[contains(concat(' ',@alt,' '),' i1go1by@gmail.com ')]")));
-        }
-
-        [OneTimeTearDown]
-        public void CloseDriver()
-        {
+            CollectionAssert.IsNotEmpty(mainPage.GetAvatar());
             driver.Quit();
         }
     }

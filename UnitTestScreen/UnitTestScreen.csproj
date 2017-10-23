@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CookiesHelper.cs" />
+    <Compile Include="LoginPage.cs" />
+    <Compile Include="MainPage.cs" />
     <Compile Include="ScreenshotHelper.cs" />
     <Compile Include="UnitTestWithScreenshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
