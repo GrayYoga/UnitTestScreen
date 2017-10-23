@@ -1,48 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using System.IO;
-using System.Runtime.Serialization.Json;
 using Newtonsoft.Json;
 
 namespace UnitTestScreen
 {
-    public class CookiesHelper
+    public class CookiesHelper : IDisposable
     {
-        
-        IEnumerable<Cookie> _cookies;
-        public IEnumerable<Cookie> Cookies {
-            get { return _cookies; }
-            set
+        public IEnumerable<Cookie> Cookies {get;  set;}
+
+        public bool SavedCookiesIsAvailable() { return File.Exists(HostName); }
+
+        private string HostName;
+
+        public CookiesHelper(string hostName)
+        {
+            if(hostName != null)
             {
-                _cookies = value;
-                using (StreamWriter streamWriter = new StreamWriter(this.HostName))
+                HostName = hostName;
+                if (File.Exists(HostName))
                 {
-                    streamWriter.Write(JsonConvert.SerializeObject(_cookies,
-                        new JsonSerializerSettings{TypeNameHandling = TypeNameHandling.All}));
+                    using (StreamReader streamReader = new StreamReader(this.HostName))
+                    {
+                        Cookies = JsonConvert.DeserializeObject<IEnumerable<Cookie>>(streamReader.ReadToEnd(),
+                            new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+                    }
+                }
+                else
+                {
+                    Cookies = new List<Cookie>();
                 }
             }
         }
 
-        public bool IsSet { get; }
-        private string HostName;
-        public CookiesHelper(string HostName = null)
+        public void Dispose()
         {
-            if(HostName != null)
+            if (HostName != null)
             {
-                // проверить наличие файла
-                this.HostName = HostName;
-                if (File.Exists(this.HostName))
+                using (StreamWriter streamWriter = new StreamWriter(this.HostName))
                 {
-                    IsSet = true;
-                    using (StreamReader streamReader = new StreamReader(this.HostName))
-                    {
-                        _cookies = JsonConvert.DeserializeObject<IEnumerable<Cookie>>(streamReader.ReadToEnd(),
-                            new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
-                    }
+                    streamWriter.Write(JsonConvert.SerializeObject(Cookies,
+                        new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }));
                 }
             }
         }
