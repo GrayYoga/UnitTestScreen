@@ -59,11 +59,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CookiesHelper.cs" />
-    <Compile Include="LoginPage.cs" />
-    <Compile Include="MainPage.cs" />
-    <Compile Include="ScreenshotHelper.cs" />
-    <Compile Include="UnitTestWithScreenshot.cs" />
+    <Compile Include="Helpers\CookiesHelper.cs" />
+    <Compile Include="Models\ConfigModel.cs" />
+    <Compile Include="Pages\LoginPage.cs" />
+    <Compile Include="Pages\MainPage.cs" />
+    <Compile Include="Helpers\ScreenshotHelper.cs" />
+    <Compile Include="TestData\Config.cs" />
+    <Compile Include="Tests\UnitTestWithScreenshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
