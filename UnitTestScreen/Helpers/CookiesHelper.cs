@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
 
 namespace UnitTestScreen
 {
     public class CookiesHelper : IDisposable
     {
         private string HostName;
+        private JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         public IEnumerable<Cookie> Cookies {get;  set;}
+        
 
         public bool SavedCookiesAreAvailable() { return File.Exists(HostName); }
 
@@ -19,10 +21,11 @@ namespace UnitTestScreen
 
             if (File.Exists(HostName))
             {
-                using (var streamReader = new StreamReader(this.HostName))
+                using (var streamReader = new StreamReader(HostName))
                 {
-                    Cookies = JsonConvert.DeserializeObject<IEnumerable<Cookie>>(streamReader.ReadToEnd(),
-                        new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+                    var jsonContent = streamReader.ReadToEnd();
+                    
+                    Cookies = JsonConvert.DeserializeObject<IEnumerable<Cookie>>(jsonContent, JsonSerializerSettings);
                 }
             }
             else
@@ -31,13 +34,30 @@ namespace UnitTestScreen
             }
         }
 
-        public void Dispose()
+        #region IDisposable Support
+        private bool disposedValue = false; // Для определения избыточных вызовов
+
+        protected virtual void Dispose(bool disposing)
         {
-            using (var streamWriter = new StreamWriter(HostName))
+            if (!disposedValue)
             {
-                streamWriter.Write(JsonConvert.SerializeObject(Cookies,
-                    new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }));
+                using (var streamWriter = new StreamWriter(HostName))
+                {
+                    streamWriter.Write(JsonConvert.SerializeObject(Cookies,JsonSerializerSettings));
+                }
+                disposedValue = true;
             }
         }
+
+        ~CookiesHelper()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+        #endregion
     }
 }
