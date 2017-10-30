@@ -89,7 +89,7 @@
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\MainPage.cs" />
     <Compile Include="Helpers\ScreenshotHelper.cs" />
-    <Compile Include="Tests\UnitTestWithScreenshot.cs" />
+    <Compile Include="Tests\AuthenticationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

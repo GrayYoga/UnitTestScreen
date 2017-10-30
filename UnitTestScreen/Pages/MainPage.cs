@@ -25,5 +25,10 @@ namespace UnitTestScreen
         {
             return Driver.FindElement(Avatar);
         }
+
+        public bool IsAutorized()
+        {
+            return (null != GetAvatar());
+        }
     }
 }

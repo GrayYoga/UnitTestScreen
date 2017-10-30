@@ -12,16 +12,10 @@ namespace UnitTestScreen
     {
         private RemoteWebDriver Driver;
 
-        public AuthenticateHelper(RemoteWebDriver driver)
-        {
-            Driver = driver;
-        }
-        public void Authenticate(ConfigModel config)
+        public static void Authenticate(RemoteWebDriver driver, ConfigModel config)
         {
             var cookieFileName = config.ResourceUri.Host;
             string absoluteCookiesFleName = Path.Combine(TestContext.CurrentContext.TestDirectory, cookieFileName);
-
-            MainPage mainPage = new MainPage(Driver);
 
             using (var cookiesHelper = new CookiesHelper(absoluteCookiesFleName))
             {
@@ -29,19 +23,20 @@ namespace UnitTestScreen
                 {
                     foreach (Cookie cookie in cookiesHelper.Cookies)
                     {
-                        Driver.Manage().Cookies.AddCookie(cookie);
+                        driver.Manage().Cookies.AddCookie(cookie);
                     }
-                    Driver.Navigate().Refresh();
+                    driver.Navigate().Refresh();
                 }
                 else
                 {
+                    var mainPage = new MainPage(driver);
                     mainPage.GoToLoginPage()
                         .TypeUser(config.UserName)
                         .TypePassword(config.UserPassword)
                         .LoginButtonClick();
 
-                    new WebDriverWait(Driver, TimeSpan.FromSeconds(10)).Until(drv => mainPage.GetAvatar());
-                    cookiesHelper.Cookies = Driver.Manage().Cookies.AllCookies;
+                    new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(drv => mainPage.GetAvatar());
+                    cookiesHelper.Cookies = driver.Manage().Cookies.AllCookies;
                 }
             }
         }

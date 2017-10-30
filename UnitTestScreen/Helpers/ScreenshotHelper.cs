@@ -34,8 +34,9 @@ namespace UnitTestScreen
         public string TakeScreenshotAndGetLink(string screenshotDirectoryPath)
         {
             string filePath = TakeScreenshot(screenshotDirectoryPath);
-            return $"<a href = \"file://{filePath.Replace('\\', '/').Replace(':', '|')}\" target = \"_blank\"> " +
-                $"<img src = \"file://{filePath.Replace('\\', '/').Replace(':', '|')}\" alt = \"Screensot\" width = \"100%\" ></a><br>";
+            filePath = filePath.Replace('\\', '/').Replace(':', '|');
+            return $"<a href = \"file://{filePath}\" target = \"_blank\"> " +
+                $"<img src = \"file://{filePath}\" alt = \"Screensot\" width = \"100%\" ></a><br>";
         }
 
         public string TakeScreenshotAndGetBase64Link()

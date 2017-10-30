@@ -8,7 +8,7 @@ using UnitTestScreen.Models;
 namespace UnitTestScreen
 {
     [TestFixture]
-    public class UnitTestWithScreenshot
+    public class AuthenticationTests
     {
         private RemoteWebDriver Driver;
 
@@ -23,13 +23,13 @@ namespace UnitTestScreen
         [Test]
         public void AuthenticateTest()
         {
-            var config = new TestsConfig().GetConfig();
+            var config = TestsConfig.GetConfig();
 
             Driver.Navigate().GoToUrl(config.ResourceUri);
 
-            new AuthenticateHelper(Driver).Authenticate(config);
+            AuthenticateHelper.Authenticate(Driver, config);
 
-            Assert.NotNull(new MainPage(Driver).GetAvatar());
+            Assert.True(new MainPage(Driver).IsAutorized());
         }
 
         [TearDown]

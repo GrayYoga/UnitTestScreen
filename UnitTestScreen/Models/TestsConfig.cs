@@ -5,7 +5,7 @@ namespace UnitTestScreen.Models
 {
     class TestsConfig
     {
-        public ConfigModel GetConfig()
+        public static ConfigModel GetConfig()
         {
             return new ConfigurationBuilder()
                 .SetBasePath(TestContext.CurrentContext.TestDirectory)

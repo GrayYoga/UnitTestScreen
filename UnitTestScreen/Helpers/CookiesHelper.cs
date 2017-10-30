@@ -3,21 +3,30 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace UnitTestScreen
 {
     public class CookiesHelper : IDisposable
     {
         private string HostName;
-        private JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+        private JsonSerializerSettings jsonSerializerSettings;
+
         public IEnumerable<Cookie> Cookies {get;  set;}
         
-
-        public bool SavedCookiesAreAvailable() { return File.Exists(HostName); }
+        public bool SavedCookiesAreAvailable()
+        {
+            return File.Exists(HostName);
+        }
 
         public CookiesHelper(string hostName)
         {
             HostName = hostName ?? throw new ArgumentNullException("Parameter hostName cannot be null ", nameof(hostName));
+
+            jsonSerializerSettings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
 
             if (File.Exists(HostName))
             {
@@ -25,7 +34,7 @@ namespace UnitTestScreen
                 {
                     var jsonContent = streamReader.ReadToEnd();
                     
-                    Cookies = JsonConvert.DeserializeObject<IEnumerable<Cookie>>(jsonContent, JsonSerializerSettings);
+                    Cookies = JsonConvert.DeserializeObject<IEnumerable<Cookie>>(jsonContent, jsonSerializerSettings);
                 }
             }
             else
@@ -41,9 +50,12 @@ namespace UnitTestScreen
         {
             if (!disposedValue)
             {
-                using (var streamWriter = new StreamWriter(HostName))
+                if(Cookies.Count() > 0)
                 {
-                    streamWriter.Write(JsonConvert.SerializeObject(Cookies,JsonSerializerSettings));
+                    using (var streamWriter = new StreamWriter(HostName))
+                    {
+                        streamWriter.Write(JsonConvert.SerializeObject(Cookies, jsonSerializerSettings));
+                    }
                 }
                 disposedValue = true;
             }
