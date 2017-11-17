@@ -2,16 +2,12 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnitTestScreen.Models;
 
-namespace UnitTestScreen.Tests
+namespace UnitTestScreen
 {
-    
+
     [TestFixture]
     public class MenuTests
     {
@@ -24,7 +20,7 @@ namespace UnitTestScreen.Tests
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             Driver.Manage().Window.Size = new Size(1360, 1020);
 
-            var config = TestsConfig.GetConfig();
+            var config = TestsConfig.GetConfig(GetType().ToString());
 
             Driver.Navigate().GoToUrl(config.ResourceUri);
             AuthenticateHelper.Authenticate<W2aMenuPage>(Driver, config);

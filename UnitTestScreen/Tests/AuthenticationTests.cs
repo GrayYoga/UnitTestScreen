@@ -24,7 +24,8 @@ namespace UnitTestScreen
         [Repeat(2)]
         public void AuthenticateTest()
         {
-            var config = TestsConfig.GetConfig();
+
+            var config = TestsConfig.GetConfig(GetType().ToString());
 
             Driver.Navigate().GoToUrl(config.ResourceUri);
 
