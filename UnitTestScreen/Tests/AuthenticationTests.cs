@@ -21,13 +21,14 @@ namespace UnitTestScreen
         }
 
         [Test]
+        [Repeat(2)]
         public void AuthenticateTest()
         {
             var config = TestsConfig.GetConfig();
 
             Driver.Navigate().GoToUrl(config.ResourceUri);
 
-            AuthenticateHelper.Authenticate(Driver, config);
+            AuthenticateHelper.Authenticate<MainPage>(Driver, config);
 
             Assert.True(new MainPage(Driver).IsAutorized());
         }

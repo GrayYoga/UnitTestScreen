@@ -3,26 +3,27 @@ using OpenQA.Selenium.Remote;
 
 namespace UnitTestScreen
 {
-    public class LoginPage
+    public class LoginPage : BasePage, IBaseLoginPage
     {
-        private RemoteWebDriver Driver;
-
         private By User = By.Id("user_email");
         private By Password = By.Id("user_password");
         private By LoginButton = By.CssSelector(@"#new_user input.login-button");
 
-        public LoginPage(RemoteWebDriver driver)
+        public LoginPage(RemoteWebDriver driver) : base (driver)
         {
-            Driver = driver;
         }
 
-        public LoginPage TypeUser(string userName)
+        public LoginPage():base()
+        {
+        }
+
+        public IBaseLoginPage TypeUser(string userName)
         {
             Driver.FindElement(User).SendKeys(userName);
             return this;
         }
 
-        public LoginPage TypePassword(string password)
+        public IBaseLoginPage TypePassword(string password)
         {
             Driver.FindElement(Password).SendKeys(password);
             return this;

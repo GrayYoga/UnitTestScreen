@@ -3,19 +3,19 @@ using OpenQA.Selenium.Remote;
 
 namespace UnitTestScreen
 {
-    public class MainPage
+    public class MainPage : BasePage, IGoToAuthenticate
     {
-        private RemoteWebDriver Driver;
-
         private By SignIn = By.CssSelector(@"#navbar a[href='/sign_in']");
         private By Avatar = By.CssSelector(@"#navbar img.gravatar");
 
-        public MainPage(RemoteWebDriver driver)
+        public MainPage(RemoteWebDriver driver) : base(driver)
         {
-            Driver = driver;
+        }
+        public MainPage() : base ()
+        {
         }
 
-        public LoginPage GoToLoginPage()
+        public IBaseLoginPage GoToLoginPage()
         {
             Driver.FindElement(SignIn).Click();
             return new LoginPage(Driver);

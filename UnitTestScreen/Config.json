@@ -1,5 +1,7 @@
 {
-  "ResourceUri": "http://courses.way2automation.com",
-  "UserName": "i1go1by@gmail.com",
+  "ResourceUri": "http://way2automation.com/way2auto_jquery/menu.php",
+  "UserName": "i1go1by",/**/
+  /*"ResourceUri": "http://courses.way2automation.com",
+  "UserName": "i1go1by@gmail.com",/**/
   "UserPassword": "321654"
 }
