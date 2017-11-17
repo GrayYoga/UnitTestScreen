@@ -29,6 +29,7 @@ namespace UnitTestScreen.Tests
             Driver.Navigate().GoToUrl(config.ResourceUri);
             AuthenticateHelper.Authenticate<W2aMenuPage>(Driver, config);
             // после авторизации переход происходит не на ту страницу, с которой начиналась авторизация
+            Driver.Navigate().Refresh();
             Driver.Navigate().GoToUrl(config.ResourceUri); 
         }
 
