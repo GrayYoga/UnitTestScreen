@@ -6,7 +6,7 @@
 Также возможен запуск из консоли командой `nunit3-console UnitTestScreen.dll --where "name=MenuTests"`.
 
 ### Шаги теста:
-
+  
 - Открывает страницу http://way2automation.com/way2auto_jquery/menu.php, проходит авторизацию на сайте (задействован механизм переиспользования cookies).
 - Открывает Menu with submenu
 - Находит элемент меню с подменю
