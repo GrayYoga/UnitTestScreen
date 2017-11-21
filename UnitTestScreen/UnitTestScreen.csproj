@@ -100,12 +100,14 @@
     <Compile Include="Pages\way2automation.com\W2aLoginPage.cs" />
     <Compile Include="Pages\way2automation.com\W2aMenuPage.cs" />
     <Compile Include="Pages\way2automation.com\W2aSortablePage.cs" />
+    <Compile Include="Tests\AlertsTests.cs" />
     <Compile Include="Tests\AuthenticationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\DroppableTests.cs" />
     <Compile Include="Tests\FramesAndWindowsTests.cs" />
     <Compile Include="Tests\MenuTests.cs" />
     <Compile Include="Tests\SortableTests.cs" />
+    <Compile Include="Pages\way2automation.com\W2aAlertsPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.json">
