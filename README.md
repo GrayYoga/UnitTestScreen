@@ -1,17 +1,32 @@
 # UnitTestScreen
 
-Тестирование функции Drag and Drop 2 - сортировка. 
+Тестирование создания новой вкладки по ссылке. 
 
-Для запуска нужно собрать проект в Visual Studio и запустить тест DroppableTests.SortableTests из среды. 
+Для запуска нужно собрать проект в Visual Studio и запустить тест DroppableTests.FramesAndWindowsTests из среды. 
 
-Также возможен запуск из консоли командой `nunit3-console UnitTestScreen.dll --where "name=SortableTests"`.
+Также возможен запуск из консоли командой `nunit3-console UnitTestScreen.dll --where "name=FramesAndWindowsTests"`.
 
-Тест выполняет следующие шаги: 
+В решении реализованы два теста:
 
-* Открывает http://way2automation.com/way2auto_jquery/sortable.php
+#### Тест NewBrowserTabTest
 
-* Проверяет прямой порядок сортировки.
+* Открывает http://way2automation.com/way2auto_jquery/frames-and-windows.php
 
-* Меняет параметр сортировки списка элементов.
+* Нажимает на ссылку
 
-* Проверяет обратный порядок сортировки.
+* Переносит фокус на новую вкладку, нажимает ссылку
+
+* Проверяет, что открылась третья вкладка
+
+
+#### Тест NewMultiplewindowsTest 
+
+* Открывает http://way2automation.com/way2auto_jquery/frames-and-windows.php
+
+* Открывает Open Multiple Windows
+
+* Нажимает на ссылку
+
+* Переносит фокус на новое окно, нажимает ссылку
+
+* Проверяет, что открылось новое окно

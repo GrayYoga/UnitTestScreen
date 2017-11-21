@@ -29,23 +29,40 @@ namespace UnitTestScreen
         }
 
         [Test]
+        public void NewBrowserTabTest()
+        {
+            var w2aFrameAndWindowsPage = new W2aFramesAndWindowsPage(Driver);
+
+            w2aFrameAndWindowsPage
+                .GoToNewWindowTab()
+                .SwitchToNewWindowFrame()
+                .ClickToLinkToNewBrowserTab();
+
+            Driver.SwitchTo().Window(Driver.WindowHandles[1]);
+
+            // По правильному нужно завести новую страницу,
+            // но ради одного клика можно задействовать существующий код.
+            w2aFrameAndWindowsPage.ClickToLinkToNewBrowserTab();
+
+            Assert.That(Driver.WindowHandles.Count == 3);
+        }
+
+        [Test]
         public void NewMultiplewindowsTest()
         {
             var w2aFrameAndWindowsPage = new W2aFramesAndWindowsPage(Driver);
 
             w2aFrameAndWindowsPage.GoToMultipleWindowsTab();
 
-            w2aFrameAndWindowsPage.SwitchToFramesAndWindowsFrame();
+            w2aFrameAndWindowsPage.SwitchToMoltipleWindowsFrame();
 
             w2aFrameAndWindowsPage.ClickToLinkToNewMultipleWindows();
 
             Driver.SwitchTo().Window(Driver.WindowHandles[1]);
 
-            // По правильному нужно завести новую страницу,
-            // но ради одного клика можно задействовать существующий код.
-            w2aFrameAndWindowsPage.ClickToLinkToNewMultipleWindows();
-
-            Assert.That(Driver.WindowHandles.Count == 3);
+            w2aFrameAndWindowsPage.ClickToLinkToOpenWindow();
+            
+            Assert.That(Driver.WindowHandles.Count == 5);
         }
 
         [TearDown]
