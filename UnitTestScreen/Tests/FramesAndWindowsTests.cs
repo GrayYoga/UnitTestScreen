@@ -8,7 +8,7 @@ using UnitTestScreen.Models;
 namespace UnitTestScreen
 {
     [TestFixture]
-    class SortableTests
+    class FramesAndWindowsTests
     {
         private RemoteWebDriver Driver;
 
@@ -22,24 +22,28 @@ namespace UnitTestScreen
             var config = TestsConfig.GetConfig(GetType().ToString());
 
             Driver.Navigate().GoToUrl(config.ResourceUri);
-            AuthenticateHelper.Authenticate<W2aSortablePage>(Driver, config);
+            AuthenticateHelper.Authenticate<W2aFramesAndWindowsPage>(Driver, config);
             // после авторизации переход происходит не на ту страницу, с которой начиналась авторизация
             Driver.Navigate().Refresh();
             Driver.Navigate().GoToUrl(config.ResourceUri);
         }
 
         [Test]
-        public void DragAndDropSortingTest()
+        public void NewBrowserTabTest()
         {
-            var w2aSortablePage = new W2aSortablePage(Driver);
+            var w2aFrameAndWindowsPage = new W2aFramesAndWindowsPage(Driver);
 
-            w2aSortablePage.SwitchToSortableFrame();
+            w2aFrameAndWindowsPage.SwitchToSortableFrame();
 
-            Assert.That(w2aSortablePage.IsNormalSort());
-                        
-            w2aSortablePage.RevertSortElements();
+            w2aFrameAndWindowsPage.ClickToLinkToNewTab();
 
-            Assert.That(w2aSortablePage.IsRevertSort()); 
+            Driver.SwitchTo().Window(Driver.WindowHandles[1]);
+
+            // По правильному нужно завести новую страницу,
+            // но ради одного клика можно задействовать существующий код.
+            w2aFrameAndWindowsPage.ClickToLinkToNewTab();
+
+            Assert.That(Driver.WindowHandles.Count == 3);
         }
 
         [TearDown]

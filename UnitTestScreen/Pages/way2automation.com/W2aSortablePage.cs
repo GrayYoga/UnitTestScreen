@@ -56,7 +56,7 @@ namespace UnitTestScreen
 
         public IBaseLoginPage GoToLoginPage()
         {
-            return new W2aSortablePage(Driver).GoToLoginPage();
+            return new W2aLoginPage(Driver).GoToLoginPage();
         }
 
         /// <summary>

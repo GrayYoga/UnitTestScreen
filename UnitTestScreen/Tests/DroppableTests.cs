@@ -22,7 +22,7 @@ namespace UnitTestScreen
             var config = TestsConfig.GetConfig(GetType().ToString());
 
             Driver.Navigate().GoToUrl(config.ResourceUri);
-            AuthenticateHelper.Authenticate<W2aMenuPage>(Driver, config);
+            AuthenticateHelper.Authenticate<W2aDroppablePage>(Driver, config);
             // после авторизации переход происходит не на ту страницу, с которой начиналась авторизация
             Driver.Navigate().Refresh();
             Driver.Navigate().GoToUrl(config.ResourceUri);

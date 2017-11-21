@@ -95,13 +95,15 @@
     <Compile Include="Pages\course.way2automation.com\LoginPage.cs" />
     <Compile Include="Pages\course.way2automation.com\MainPage.cs" />
     <Compile Include="Helpers\ScreenshotHelper.cs" />
-    <Compile Include="Pages\way2automation.com_way2auto_jquery_droppable\W2aDroppablePage.cs" />
-    <Compile Include="Pages\way2automation.com_way2auto_jquery_menu\W2aLoginPage.cs" />
-    <Compile Include="Pages\way2automation.com_way2auto_jquery_menu\W2aMenuPage.cs" />
-    <Compile Include="Pages\way2automation.com_way2auto_jquery_sortable\W2aSortablePage.cs" />
+    <Compile Include="Pages\way2automation.com\W2aFramesAndWindowsPage.cs" />
+    <Compile Include="Pages\way2automation.com\W2aDroppablePage.cs" />
+    <Compile Include="Pages\way2automation.com\W2aLoginPage.cs" />
+    <Compile Include="Pages\way2automation.com\W2aMenuPage.cs" />
+    <Compile Include="Pages\way2automation.com\W2aSortablePage.cs" />
     <Compile Include="Tests\AuthenticationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\DroppableTests.cs" />
+    <Compile Include="Tests\FramesAndWindowsTests.cs" />
     <Compile Include="Tests\MenuTests.cs" />
     <Compile Include="Tests\SortableTests.cs" />
   </ItemGroup>

@@ -42,7 +42,7 @@ namespace UnitTestScreen
 
         public IBaseLoginPage GoToLoginPage()
         {
-            return new W2aDroppablePage(Driver).GoToLoginPage();
+            return new W2aLoginPage(Driver).GoToLoginPage();
         }
     }
 }

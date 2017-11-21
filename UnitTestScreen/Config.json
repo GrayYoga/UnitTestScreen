@@ -18,5 +18,10 @@
     "ResourceUri": "http://way2automation.com/way2auto_jquery/sortable.php",
     "UserName": "i1go1by",
     "UserPassword": "321654"
+  },
+  "UnitTestScreen.FramesAndWindowsTests": {
+    "ResourceUri": "http://way2automation.com/way2auto_jquery/frames-and-windows.php",
+    "UserName": "i1go1by",
+    "UserPassword": "321654"
   }
 }
