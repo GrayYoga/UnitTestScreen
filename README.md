@@ -1,15 +1,17 @@
 # UnitTestScreen
 
-Тестирование функции Drag and Drop.
+Тестирование функции Drag and Drop 2 - сортировка. 
 
-Для запуска нужно собрать проект в Visual Studio и запустить тест DroppableTests.DragAndDropTest из среды. 
+Для запуска нужно собрать проект в Visual Studio и запустить тест DroppableTests.SortableTests из среды. 
 
-Также возможен запуск из консоли командой `nunit3-console UnitTestScreen.dll --where "name=DroppableTests"`.
+Также возможен запуск из консоли командой `nunit3-console UnitTestScreen.dll --where "name=SortableTests"`.
 
 Тест выполняет следующие шаги: 
 
-* Открывает http://way2automation.com/way2auto_jquery/droppable.php
+* Открывает http://way2automation.com/way2auto_jquery/sortable.php
 
-* Перетаскивает элемент в принимающий.
+* Проверяет прямой порядок сортировки.
 
-* Убеждается, что текст принимающего элемента изменился.
+* Меняет параметр сортировки списка элементов.
+
+* Проверяет обратный порядок сортировки.

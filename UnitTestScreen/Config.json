@@ -13,5 +13,10 @@
     "ResourceUri": "http://way2automation.com/way2auto_jquery/droppable.php",
     "UserName": "i1go1by",
     "UserPassword": "321654"
+  },
+  "UnitTestScreen.SortableTests": {
+    "ResourceUri": "http://way2automation.com/way2auto_jquery/sortable.php",
+    "UserName": "i1go1by",
+    "UserPassword": "321654"
   }
 }
