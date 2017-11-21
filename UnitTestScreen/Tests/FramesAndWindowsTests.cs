@@ -29,19 +29,21 @@ namespace UnitTestScreen
         }
 
         [Test]
-        public void NewBrowserTabTest()
+        public void NewMultiplewindowsTest()
         {
             var w2aFrameAndWindowsPage = new W2aFramesAndWindowsPage(Driver);
 
-            w2aFrameAndWindowsPage.SwitchToSortableFrame();
+            w2aFrameAndWindowsPage.GoToMultipleWindowsTab();
 
-            w2aFrameAndWindowsPage.ClickToLinkToNewTab();
+            w2aFrameAndWindowsPage.SwitchToFramesAndWindowsFrame();
+
+            w2aFrameAndWindowsPage.ClickToLinkToNewMultipleWindows();
 
             Driver.SwitchTo().Window(Driver.WindowHandles[1]);
 
             // По правильному нужно завести новую страницу,
             // но ради одного клика можно задействовать существующий код.
-            w2aFrameAndWindowsPage.ClickToLinkToNewTab();
+            w2aFrameAndWindowsPage.ClickToLinkToNewMultipleWindows();
 
             Assert.That(Driver.WindowHandles.Count == 3);
         }

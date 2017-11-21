@@ -10,8 +10,9 @@ namespace UnitTestScreen
 {
     class W2aFramesAndWindowsPage : BasePage, IGoToAuthenticate
     {
-        private By WindowsFrame = By.CssSelector("iframe[src = 'frames-windows/defult1.html']");
-        private By LinkToNewTab = By.CssSelector("a");
+        private By OpenMultipleWindowsTab = By.CssSelector("a[href = '#example-1-tab-4']");
+        private By WindowsFrame = By.CssSelector("iframe[src = 'frames-windows/defult4.html']");
+        private By LinkToNewMultipleWindows = By.XPath("//a[text()='Open multiple pages']");
 
         public W2aFramesAndWindowsPage(RemoteWebDriver driver) : base(driver)
         {
@@ -26,15 +27,21 @@ namespace UnitTestScreen
             return new W2aLoginPage(Driver).GoToLoginPage();
         }
 
-        public W2aFramesAndWindowsPage SwitchToSortableFrame()
+        public W2aFramesAndWindowsPage GoToMultipleWindowsTab()
+        {
+            Driver.FindElement(OpenMultipleWindowsTab).Click();
+            return this;
+        }
+
+        public W2aFramesAndWindowsPage SwitchToFramesAndWindowsFrame()
         {
             Driver.SwitchTo().Frame(Driver.FindElement(WindowsFrame));
             return this;
         }
 
-        public W2aFramesAndWindowsPage ClickToLinkToNewTab()
+        public W2aFramesAndWindowsPage ClickToLinkToNewMultipleWindows()
         {
-            Driver.FindElement(LinkToNewTab).Click();
+            Driver.FindElement(LinkToNewMultipleWindows).Click();
             return this;
         }
     }
